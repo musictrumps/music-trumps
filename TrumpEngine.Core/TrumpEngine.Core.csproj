@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>TrumpEngine.Core</RootNamespace>
+    <AssemblyName>TrumpEngine.Core</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrumpEngine.Data\TrumpEngine.Data.csproj" />
+    <ProjectReference Include="..\TrumpEngine.Model\TrumpEngine.Model.csproj" />
+  </ItemGroup>
+
+</Project>
