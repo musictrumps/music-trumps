@@ -4,4 +4,5 @@ Project that could be exported as a Web-API and attached to a front-end implemen
 We are using the Spotify API as a 'database' that returns bands by genre, picture from each artists and number of albums from each band.
 
 
-[![Build Status](https://travis-ci.org/thiagosanches/trump-engine.svg?branch=master)](https://travis-ci.org/thiagosanches/trump-engine)
+[![Build status](https://ci.appveyor.com/api/projects/status/padwxu4pv7qyrnut/branch/master?svg=true)](https://ci.appveyor.com/project/ThiagoSanches/trump-engine/branch/master)
+
