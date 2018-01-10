@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using TrumpEngine.Data.Providers.Implementation.Model;
 using TrumpEngine.Data.Providers.Interface;
@@ -14,10 +13,19 @@ namespace TrumpEngine.Data.Providers.Implementation
     {
         private const string SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE = "https://api.spotify.com/v1/recommendations?market=US&seed_genres={0}&limit=100";
         private const string SPOTIFY_URL_ARTIST_INFORMATION = "https://api.spotify.com/v1/artists?ids={0}";
+        private const string SPOTIFY_URL_TOKEN = "https://accounts.spotify.com/api/token";
+        private const string SPOTIFY_GRANT_TYPE_HEADER = "grant_type";
+        private const string SPOTIFY_GRANT_TYPE_VALUE = "client_credentials";
+        private const string SPOTIFY_AUTHORIZATION_HEADER = "Authorization";
+        private const string SPOTIFY_ACCESS_TOKEN = "Bearer {0}";
         private const int SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS = 50;
 
-        private const string SPOTIFY_AUTHORIZATION_HEADER = "Authorization";
-        private const string TOKEN = "Bearer BQDLiwYqu8fwlLgx_UDuqW0HernovKqPybNb0-lbivQBSmErB_39S-3X4dfG5KKla05W8uGrCQxLYWWQiPdOTxGuCnJKBHI8-GvXHIbkA2GynW0YPfxa1XTHmX7B0clYF0is8YedB9S7Jf8GhH5RSw";
+        private string AccessToken { get; set; }
+
+        public Spotify()
+        {
+            this.AccessToken = GetAccessToken();
+        }
 
         public List<Band> GetBandsByGenre(string genre)
         {
@@ -28,7 +36,7 @@ namespace TrumpEngine.Data.Providers.Implementation
 
                 using (System.Net.WebClient web = new System.Net.WebClient())
                 {
-                    web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, TOKEN);
+                    web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, string.Format(SPOTIFY_ACCESS_TOKEN, AccessToken));
                     string response = web.DownloadString(string.Format(SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE, genre));
                     json = JsonConvert.DeserializeObject<RecommendedTracks>(response);
                 }
@@ -85,7 +93,7 @@ namespace TrumpEngine.Data.Providers.Implementation
 
                 using (System.Net.WebClient web = new System.Net.WebClient())
                 {
-                    web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, TOKEN);
+                    web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, string.Format(SPOTIFY_ACCESS_TOKEN, AccessToken));
                     string response = web.DownloadString(string.Format(SPOTIFY_URL_ARTIST_INFORMATION, ids));
                     artists = JsonConvert.DeserializeObject<SeveralArtists>(response);
                 }
@@ -97,5 +105,26 @@ namespace TrumpEngine.Data.Providers.Implementation
                 throw;
             }
         }
-    }   
+
+        private string GetAccessToken()
+        {
+            byte[] credentials = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", "1cea836e0b114e1b865afc7ebcbf3865", "8d698f13989d4b47aa86f1e212d1ffdc")); //FIXME
+            string encodedCredentials = Convert.ToBase64String(credentials);
+            Token token = null;
+
+            using (System.Net.WebClient web = new System.Net.WebClient())
+            {
+                var data = new System.Collections.Specialized.NameValueCollection();
+                data.Add(SPOTIFY_GRANT_TYPE_HEADER, SPOTIFY_GRANT_TYPE_VALUE);
+
+                web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, string.Format("Basic {0}", encodedCredentials));
+                web.Encoding = Encoding.UTF8;
+
+                byte[] response = web.UploadValues(SPOTIFY_URL_TOKEN, data);
+                token = JsonConvert.DeserializeObject<Token>(Encoding.UTF8.GetString(response));
+            }
+
+            return token.AccessToken;
+        }
+    }
 }
