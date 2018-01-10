@@ -1,4 +1,0 @@
-language: csharp
-solution: TrumpEngine.sln
-install:
-    - nuget restore TrumpEngine.sln
