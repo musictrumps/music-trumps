@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
 using System.Text;
 using TrumpEngine.Data.Providers.Implementation.Model;
 using TrumpEngine.Data.Providers.Interface;
@@ -73,7 +75,6 @@ namespace TrumpEngine.Data.Providers.Implementation
                     {
                         var band = bands.FirstOrDefault(b => b.Id.Equals(artist.Id));
                         band.Picture = artist.Images?.FirstOrDefault().Url;
-                        band.Albums = 10; //TODO
                     }
                 }
 
@@ -91,7 +92,7 @@ namespace TrumpEngine.Data.Providers.Implementation
             {
                 SeveralArtists artists = null;
 
-                using (System.Net.WebClient web = new System.Net.WebClient())
+                using (WebClient web = new System.Net.WebClient())
                 {
                     web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, string.Format(SPOTIFY_ACCESS_TOKEN, AccessToken));
                     string response = web.DownloadString(string.Format(SPOTIFY_URL_ARTIST_INFORMATION, ids));
@@ -106,25 +107,48 @@ namespace TrumpEngine.Data.Providers.Implementation
             }
         }
 
+        private int GetAlbumsByArtist(string id)
+        {
+            try
+            {
+                using (WebClient web = new WebClient())
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private string GetAccessToken()
         {
-            byte[] credentials = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", "1cea836e0b114e1b865afc7ebcbf3865", "8d698f13989d4b47aa86f1e212d1ffdc")); //FIXME
-            string encodedCredentials = Convert.ToBase64String(credentials);
-            Token token = null;
-
-            using (System.Net.WebClient web = new System.Net.WebClient())
+            try
             {
-                var data = new System.Collections.Specialized.NameValueCollection();
-                data.Add(SPOTIFY_GRANT_TYPE_HEADER, SPOTIFY_GRANT_TYPE_VALUE);
+                byte[] credentials = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", "1cea836e0b114e1b865afc7ebcbf3865", "8d698f13989d4b47aa86f1e212d1ffdc")); //FIXME
+                string encodedCredentials = Convert.ToBase64String(credentials);
+                Token token = null;
 
-                web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, string.Format("Basic {0}", encodedCredentials));
-                web.Encoding = Encoding.UTF8;
+                using (System.Net.WebClient web = new System.Net.WebClient())
+                {
+                    var data = new NameValueCollection();
+                    data.Add(SPOTIFY_GRANT_TYPE_HEADER, SPOTIFY_GRANT_TYPE_VALUE);
 
-                byte[] response = web.UploadValues(SPOTIFY_URL_TOKEN, data);
-                token = JsonConvert.DeserializeObject<Token>(Encoding.UTF8.GetString(response));
+                    web.Headers.Add(SPOTIFY_AUTHORIZATION_HEADER, string.Format("Basic {0}", encodedCredentials));
+                    web.Encoding = Encoding.UTF8;
+
+                    byte[] response = web.UploadValues(SPOTIFY_URL_TOKEN, data);
+                    token = JsonConvert.DeserializeObject<Token>(Encoding.UTF8.GetString(response));
+                }
+
+                return token.AccessToken;
             }
-
-            return token.AccessToken;
+            catch(Exception)
+            {
+                throw;
+            }
         }
     }
 }
