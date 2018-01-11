@@ -14,7 +14,7 @@ namespace TrumpEngine.Data.Providers.Implementation
 {
     internal class Spotify : IProvider
     {
-        private const string SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE = "https://api.spotify.com/v1/recommendations?market=US&seed_genres={0}&limit=10"; //TODO: ADD THE LIMIT IN A CONFIGURATION FILE
+        private const string SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE = "https://api.spotify.com/v1/recommendations?market=BR&seed_genres={0}&limit=10"; //TODO: ADD THE LIMIT IN A CONFIGURATION FILE
         private const string SPOTIFY_URL_ARTIST_INFORMATION = "https://api.spotify.com/v1/artists?ids={0}";
         private const string SPOTIFY_URL_TOKEN = "https://accounts.spotify.com/api/token";
         private const string SPOTIFY_GRANT_TYPE_HEADER = "grant_type";
@@ -68,7 +68,7 @@ namespace TrumpEngine.Data.Providers.Implementation
                         .Take(SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS).ToList();
 
                     string ids = string.Join(",", filteredIds.Select(b => b.Id).ToArray());
-                    artists.AddRange(GetArtistsPicturesFromIds(ids.Substring(0, ids.Length - 1)).Artists);
+                    artists.AddRange(GetArtistsPicturesFromIds(ids).Artists);
                 }
 
                 //TODO: INJECT BY A INJECTION MECHANISM
@@ -81,7 +81,7 @@ namespace TrumpEngine.Data.Providers.Implementation
                     {
                         var band = bands.FirstOrDefault(b => b.Id.Equals(artist.Id));
                         band.Picture = artist.Images?.FirstOrDefault().Url;
-                        Task.Delay(3000).Wait(); //FIXME: IT'S JUST A WORKAROUND DUE TO THE RATE LIMITING OF MUSICBRAINZ.ORG API
+                        Task.Delay(2000).Wait(); //FIXME: IT'S JUST A WORKAROUND DUE TO THE RATE LIMITING OF MUSICBRAINZ.ORG API
                         band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
                     }
                 }
