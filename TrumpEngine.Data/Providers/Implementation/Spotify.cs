@@ -77,13 +77,10 @@ namespace TrumpEngine.Data.Providers.Implementation
                 //TODO: MOVE THE LINES ABOVE TO A CLASS TO COMBINE ALL THE DATA
                 foreach (var artist in artists)
                 {
-                    if (artist != null)
-                    {
-                        var band = bands.FirstOrDefault(b => b.Id.Equals(artist.Id));
-                        band.Picture = artist.Images?.FirstOrDefault().Url;
-                        Task.Delay(2000).Wait(); //FIXME: IT'S JUST A WORKAROUND DUE TO THE RATE LIMITING OF MUSICBRAINZ.ORG API
-                        band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
-                    }
+                    var band = bands.FirstOrDefault(b => b.Id.Equals(artist.Id));
+                    band.Picture = artist.Images?.FirstOrDefault().Url;
+                    Task.Delay(2000).Wait(); //FIXME: IT'S JUST A WORKAROUND DUE TO THE RATE LIMITING OF MUSICBRAINZ.ORG API
+                    band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
                 }
 
                 return bands;
