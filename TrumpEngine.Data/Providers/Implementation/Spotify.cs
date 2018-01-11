@@ -11,7 +11,7 @@ using TrumpEngine.Model;
 
 namespace TrumpEngine.Data.Providers.Implementation
 {
-    public class Spotify : IProvider
+    internal class Spotify : IProvider
     {
         private const string SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE = "https://api.spotify.com/v1/recommendations?market=US&seed_genres={0}&limit=100";
         private const string SPOTIFY_URL_ARTIST_INFORMATION = "https://api.spotify.com/v1/artists?ids={0}";
@@ -68,6 +68,8 @@ namespace TrumpEngine.Data.Providers.Implementation
                     artists.AddRange(GetArtistsPicturesFromIds(ids.Substring(0, ids.Length - 1)).Artists);
                 }
 
+                MusicBrainz.MusicBrainz musicBrainz = new MusicBrainz.MusicBrainz();
+
                 //combining all the data
                 foreach (var artist in artists)
                 {
@@ -75,6 +77,7 @@ namespace TrumpEngine.Data.Providers.Implementation
                     {
                         var band = bands.FirstOrDefault(b => b.Id.Equals(artist.Id));
                         band.Picture = artist.Images?.FirstOrDefault().Url;
+                        band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
                     }
                 }
 
@@ -103,22 +106,6 @@ namespace TrumpEngine.Data.Providers.Implementation
             }
             catch (Exception)
             {
-                throw;
-            }
-        }
-
-        private int GetAlbumsByArtist(string id)
-        {
-            try
-            {
-                using (WebClient web = new WebClient())
-                {
-
-                }
-            }
-            catch (Exception)
-            {
-
                 throw;
             }
         }

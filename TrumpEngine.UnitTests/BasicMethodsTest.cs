@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using TrumpEngine.Core;
 
 namespace TrumpEngine.UnitTests
@@ -14,10 +15,10 @@ namespace TrumpEngine.UnitTests
 
             bool isNameBlank = bands.Exists(b => string.IsNullOrWhiteSpace(b.Name));
             bool isPictureBlank = bands.Exists(b => string.IsNullOrWhiteSpace(b.Picture));
-            bool isAlbumEqualsZero = bands.Exists(b => b.Albums == 0);
+            bool isBeginDateMinDate = bands.Exists(b => b.Begin > DateTime.MinValue);
 
             Assert.AreEqual(false, isNameBlank, "There are some blank names.");
-            Assert.AreEqual(false, isAlbumEqualsZero, "There are no albums.");
+            Assert.AreEqual(false, isBeginDateMinDate, "There are no begin date defined.");
             Assert.AreEqual(false, isPictureBlank, "There are some blank pictures.");
         }
     }
