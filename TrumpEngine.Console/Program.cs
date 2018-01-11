@@ -11,7 +11,8 @@ namespace TrumpEngine.Console
 
             foreach (var band in bands)
             {
-                System.Console.WriteLine("Band: {0}, Picture: {1}", band.Name, band.Picture);
+                System.Console.WriteLine("Band: {0}, Year: {1}, Picture: {2}", 
+                    band.Name, band.Begin.Year, band.Picture);
             }
         }
     }

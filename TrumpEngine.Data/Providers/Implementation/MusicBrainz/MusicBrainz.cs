@@ -12,7 +12,7 @@ namespace TrumpEngine.Data.Providers.Implementation.MusicBrainz
         private const string MUSICBRAINZ_URL_QUERY_ARTISTS = "http://musicbrainz.org/ws/2/artist/?query={0}&fmt=json";
         private const string MUSICBRAINZ_USERAGENT_HEADER = "User-Agent";
         private const string MUSICBRAINZ_USERAGENT_VALUE = "TrumpEngine-Game (tsigwt@gmail.com)"; //TODO: ADD IN A CONFIGURATION FILE
-        private const int MUSICBRAINZ_SCORE_GOOD_QUALITY_DATA = 90; //TODO: ADD IN A CONFIGURATION FILE
+        private const int MUSICBRAINZ_SCORE_GOOD_QUALITY_DATA = 80; //TODO: ADD IN A CONFIGURATION FILE
 
         public DateTime GetBeginDate(string name, string genre)
         {
@@ -28,9 +28,14 @@ namespace TrumpEngine.Data.Providers.Implementation.MusicBrainz
 
                 Artist artist = DecideProperlyArtistByGenreAndScoreCriteria(json.Artists, genre, MUSICBRAINZ_SCORE_GOOD_QUALITY_DATA);
 
-                return new DateTime(Convert.ToInt32(artist.LifeSpan.Begin.Substring(0, 4)), 1, 1); //FIXME WORKAROUND!!!
+                if (artist != null &&
+                    artist.LifeSpan != null && 
+                    !string.IsNullOrWhiteSpace(artist.LifeSpan.Begin))
+                    return new DateTime(Convert.ToInt32(artist.LifeSpan.Begin.Substring(0, 4)), 1, 1); //FIXME: IT'S JUST A WORKAROUND!!!
+                else
+                    return DateTime.MinValue; //FIXME: IT'S JUST A WORKAROUND!!!
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -40,17 +45,19 @@ namespace TrumpEngine.Data.Providers.Implementation.MusicBrainz
         {
             try
             {
-                //Since it could happens to have some similar name, it's important to take a look at the score and the tags (if exists).
+                //Since it could happen to have some similar name, it's important to take a look at the score and the tags (if exists).
+                //TODO: To increase the chance to the get the right Artist, take a look at the 'disambiguation' property on the JSON.
                 List<Artist> highScoredArtists = artists.FindAll(a => a.Score >= score);
                 if (highScoredArtists.Count > 1 &&
                     highScoredArtists.Exists(a => a.Tags != null))
                 {
-                    return highScoredArtists.Find(a => a.Tags.Any(t => t.Name.Contains(genre) && t.Count > 0));
+                    return highScoredArtists.Find(a => a.Tags != null &&
+                        a.Tags.Any(t => t.Name.Contains(genre) && t.Count > 0));
                 }
                 else
                     return highScoredArtists.FirstOrDefault();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

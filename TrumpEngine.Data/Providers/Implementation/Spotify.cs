@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using TrumpEngine.Data.Providers.Implementation.Model;
 using TrumpEngine.Data.Providers.Interface;
 using TrumpEngine.Model;
@@ -13,14 +14,14 @@ namespace TrumpEngine.Data.Providers.Implementation
 {
     internal class Spotify : IProvider
     {
-        private const string SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE = "https://api.spotify.com/v1/recommendations?market=US&seed_genres={0}&limit=100";
+        private const string SPOTIFY_URL_RECOMMENDATIONS_BY_GENRE = "https://api.spotify.com/v1/recommendations?market=US&seed_genres={0}&limit=10"; //TODO: ADD THE LIMIT IN A CONFIGURATION FILE
         private const string SPOTIFY_URL_ARTIST_INFORMATION = "https://api.spotify.com/v1/artists?ids={0}";
         private const string SPOTIFY_URL_TOKEN = "https://accounts.spotify.com/api/token";
         private const string SPOTIFY_GRANT_TYPE_HEADER = "grant_type";
         private const string SPOTIFY_GRANT_TYPE_VALUE = "client_credentials";
         private const string SPOTIFY_AUTHORIZATION_HEADER = "Authorization";
         private const string SPOTIFY_ACCESS_TOKEN = "Bearer {0}";
-        private const int SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS = 50;
+        private const int SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS = 50; //LIMIT DEFINED BY THE SPOTIFY API
 
         private string AccessToken { get; set; }
 
@@ -47,9 +48,11 @@ namespace TrumpEngine.Data.Providers.Implementation
 
                 foreach (var track in json.Tracks)
                 {
-                    Band band = new Band();
-                    band.Id = track.Artists.FirstOrDefault().Id;
-                    band.Name = track.Artists.FirstOrDefault().Name;
+                    Band band = new Band
+                    {
+                        Id = track.Artists.FirstOrDefault().Id,
+                        Name = track.Artists.FirstOrDefault().Name
+                    };
 
                     if (!bands.Exists(b => b.Id.Equals(band.Id)))
                         bands.Add(band);
@@ -58,7 +61,7 @@ namespace TrumpEngine.Data.Providers.Implementation
                 int totalPagesBySeveralArtists = (int)Math.Ceiling((decimal)bands.Count / SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS);
                 List<Artist> artists = new List<Artist>();
 
-                //Get details (picture) in batch from an artist
+                //Get pictures in batch from a list of artists
                 for (int i = 0; i < totalPagesBySeveralArtists; i++)
                 {
                     var filteredIds = bands.Skip(i * SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS)
@@ -68,15 +71,17 @@ namespace TrumpEngine.Data.Providers.Implementation
                     artists.AddRange(GetArtistsPicturesFromIds(ids.Substring(0, ids.Length - 1)).Artists);
                 }
 
+                //TODO: INJECT BY A INJECTION MECHANISM
                 MusicBrainz.MusicBrainz musicBrainz = new MusicBrainz.MusicBrainz();
 
-                //combining all the data
+                //TODO: MOVE THE LINES ABOVE TO A CLASS TO COMBINE ALL THE DATA
                 foreach (var artist in artists)
                 {
                     if (artist != null)
                     {
                         var band = bands.FirstOrDefault(b => b.Id.Equals(artist.Id));
                         band.Picture = artist.Images?.FirstOrDefault().Url;
+                        Task.Delay(3000).Wait(); //FIXME: IT'S JUST A WORKAROUND DUE TO THE RATE LIMITING OF MUSICBRAINZ.ORG API
                         band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
                     }
                 }
