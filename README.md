@@ -1,6 +1,6 @@
 # trump-engine
 
-No! Nothing related to Donald Trump.
+No! Nothing related to Donald Trump, but with this [![Trump](https://en.wikipedia.org/wiki/Trump_(card_games))]
 
 Project that could be exported as a Web-API and attached to a front-end implementation to build a trump-like card game.
 
