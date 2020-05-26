@@ -1,18 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TrumpEngine.Model\TrumpEngine.Model.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration"/>
   </ItemGroup>
-<ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
-  
 </Project>
