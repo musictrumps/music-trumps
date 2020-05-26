@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Core", "TrumpEngine.Core\TrumpEngine.Core.csproj", "{3E509578-E6FB-4A1C-A94C-4DB0B7D7336C}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Model", "TrumpE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Data", "TrumpEngine.Data\TrumpEngine.Data.csproj", "{802B192C-8BD6-423E-9841-5394303ABB21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpEngine.Console", "TrumpEngine.Console\TrumpEngine.Console.csproj", "{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Console", "TrumpEngine.Console\TrumpEngine.Console.csproj", "{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpEngine.Api", "TrumpEngine.Api\TrumpEngine.Api.csproj", "{8AAB444D-7A19-4E84-A65F-EF9188D5D3CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AAB444D-7A19-4E84-A65F-EF9188D5D3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AAB444D-7A19-4E84-A65F-EF9188D5D3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AAB444D-7A19-4E84-A65F-EF9188D5D3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AAB444D-7A19-4E84-A65F-EF9188D5D3CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
