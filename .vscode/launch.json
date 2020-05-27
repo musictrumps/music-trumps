@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/TrumpEngine.Console/bin/Debug/netcoreapp2.0/TrumpEngine.Console.dll",
+            "program": "${workspaceFolder}/TrumpEngine.Console/bin/Debug/netcoreapp3.1/TrumpEngine.Console.dll",
             "args": [],
             "cwd": "${workspaceFolder}/TrumpEngine.Console",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
