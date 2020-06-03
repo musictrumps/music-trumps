@@ -1,8 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TrumpEngine.Api.Configuration;
 using TrumpEngine.Core;
+using TrumpEngine.Shared;
+using TrumpEngine.Shared.Settings;
 
 namespace TrumpEngine.Api.Controllers
 {
@@ -10,9 +11,11 @@ namespace TrumpEngine.Api.Controllers
     public class BandsController : ControllerBase
     {
         private readonly FirebaseSecrets _firebaseSecrets;
-        public BandsController(Secrets secrets)
+        private readonly BandCore _bandCore;
+        public BandsController(Settings secrets, BandCore bandCore)
         {
             _firebaseSecrets = secrets.Firebase;
+            _bandCore = bandCore;
         }
 
         [HttpGet("{genre}")]
@@ -21,8 +24,7 @@ namespace TrumpEngine.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult  Get(string genre)
         {
-            BandCore bandCore = new BandCore();
-            var bands = bandCore.GetBandsByGenre(genre);
+            var bands = _bandCore.GetBandsByGenre(genre);
             return Ok(bands);
         }
     }

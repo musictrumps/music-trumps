@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrumpEngine.Model\TrumpEngine.Model.csproj" />
+    <ProjectReference Include="..\TrumpEngine.Shared\TrumpEngine.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration" />

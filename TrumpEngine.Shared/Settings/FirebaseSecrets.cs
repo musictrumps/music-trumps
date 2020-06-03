@@ -1,10 +1,5 @@
-﻿namespace TrumpEngine.Api.Configuration
+﻿namespace TrumpEngine.Shared
 {
-    public class Secrets
-    {
-        public FirebaseSecrets Firebase { get; set; }
-    }
-
     public class FirebaseSecrets
     {
         public string Login { get; set; }

@@ -7,18 +7,18 @@ namespace TrumpEngine.Core
 {
     public class BandCore
     {
-        private readonly BandData data;
+        private readonly BandData _data;
 
-        public BandCore()
+        public BandCore(BandData bandData)
         {
-            this.data = new BandData();
+            _data = bandData;
         }
 
         public List<Band> GetBandsByGenre(string genre)
         {
             try
             {
-                return data.GetBandsByGenre(genre);
+                return _data.GetBandsByGenre(genre);
             }
             catch (Exception)
             {

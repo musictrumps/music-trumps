@@ -6,5 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrumpEngine.Core\TrumpEngine.Core.csproj" />
+    <ProjectReference Include="..\TrumpEngine.Shared\TrumpEngine.Shared.csproj" />
   </ItemGroup>
 </Project>
