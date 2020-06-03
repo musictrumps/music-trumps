@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TrumpEngine.Api.Configuration;
 
 namespace TrumpEngine.Api
 {
@@ -35,7 +36,9 @@ namespace TrumpEngine.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            var firebase = Configuration.GetSection("Firebase")
+                .Get<FirebaseSecrets>();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
