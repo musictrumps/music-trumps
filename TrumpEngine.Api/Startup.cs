@@ -26,7 +26,12 @@ namespace TrumpEngine.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var firebase = Configuration.GetSection("Firebase")
+                .Get<FirebaseSecrets>();
+
             services.AddControllers();
+           
+            services.AddSingleton(Configuration.Get<Secrets>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +41,7 @@ namespace TrumpEngine.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            var firebase = Configuration.GetSection("Firebase")
-                .Get<FirebaseSecrets>();
+          
             
             app.UseHttpsRedirection();
 

@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TrumpEngine.Api.Configuration;
 using TrumpEngine.Core;
 
 namespace TrumpEngine.Api.Controllers
@@ -8,6 +9,12 @@ namespace TrumpEngine.Api.Controllers
     [ApiController]
     public class BandsController : ControllerBase
     {
+        private readonly FirebaseSecrets _firebaseSecrets;
+        public BandsController(Secrets secrets)
+        {
+            _firebaseSecrets = secrets.Firebase;
+        }
+
         [HttpGet("{genre}")]
         [Route("/api/bands/{genre}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
