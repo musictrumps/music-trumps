@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using TrumpEngine.Core;
 using TrumpEngine.Data;
-using TrumpEngine.Shared;
 using TrumpEngine.Shared.Settings;
 
 namespace TrumpEngine.UnitTests
@@ -23,6 +23,7 @@ namespace TrumpEngine.UnitTests
 
             Configuration = builder.Build();
             _settings = Configuration.Get<Settings>();
+            Console.WriteLine(JsonSerializer.Serialize(_settings));
         }
 
         [TestMethod]
