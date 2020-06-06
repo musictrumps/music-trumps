@@ -23,4 +23,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      env: 
+        BASEURL: ${{ secrets.BASEURL }}
+        PATHARTISTINFORMATION: ${{ secrets.PATHARTISTINFORMATION }}
+        PATHRECOMMENDATIONSBYGENRE: ${{ secrets.PATHRECOMMENDATIONSBYGENRE }}
+        TOKENURL: ${{ secrets.TOKENURL }}
 
