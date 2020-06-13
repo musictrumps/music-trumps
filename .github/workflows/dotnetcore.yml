@@ -29,6 +29,6 @@ jobs:
         PATHARTISTINFORMATION: ${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}
         PATHRECOMMENDATIONSBYGENRE: ${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}
         TOKENURL: ${{ secrets.SPOTIFY__TOKENURL }}
-      run: dotnet test --no-restore --verbosity normal
+      run: export SPOTIFY__BASEURL='https://api.spotify.com/v1/';export SPOTIFY__PATHARTISTINFORMATION='artists?ids={0}';export SPOTIFY__PATHRECOMMENDATIONSBYGENRE='recommendations?market=BR&seed_genres={0}&limit=10';export SPOTIFY__TOKENURL='https://accounts.spotify.com/api/token'; dotnet test --no-restore --verbosity normal
 
 
