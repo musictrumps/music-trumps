@@ -23,6 +23,8 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Testing
+      run: echo ${{ secrets.BASEURL }}
       env: 
         BASEURL: ${{ secrets.BASEURL }}
         PATHARTISTINFORMATION: ${{ secrets.PATHARTISTINFORMATION }}
