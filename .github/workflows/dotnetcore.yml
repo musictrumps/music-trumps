@@ -21,10 +21,5 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Testing
-      run: echo ${{ secrets.SPOTIFY__BASEURL }}
     - name: Test
-      env: 
       run: export SPOTIFY__BASEURL="${{ secrets.SPOTIFY__BASEURL }}";export SPOTIFY__PATHARTISTINFORMATION="${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}";export SPOTIFY__PATHRECOMMENDATIONSBYGENRE='${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}';export SPOTIFY__TOKENURL='${{ secrets.SPOTIFY__TOKENURL }}'; dotnet test --no-restore --verbosity normal
-
-
