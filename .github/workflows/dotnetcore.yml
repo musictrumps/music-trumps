@@ -27,6 +27,6 @@ jobs:
       env: 
         PATHRECOMMENDATIONSBYGENRE: ${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}
         TOKENURL: ${{ secrets.SPOTIFY__TOKENURL }}
-      run: export SPOTIFY__BASEURL="${{ secrets.SPOTIFY__BASEURL }}";export SPOTIFY__PATHARTISTINFORMATION="${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}";export SPOTIFY__PATHRECOMMENDATIONSBYGENRE="${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}";export SPOTIFY__TOKENURL='https://accounts.spotify.com/api/token'; dotnet test --no-restore --verbosity normal
+      run: export SPOTIFY__BASEURL="${{ secrets.SPOTIFY__BASEURL }}";export SPOTIFY__PATHARTISTINFORMATION="${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}";export SPOTIFY__PATHRECOMMENDATIONSBYGENRE='${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}';export SPOTIFY__TOKENURL='https://accounts.spotify.com/api/token'; dotnet test --no-restore --verbosity normal
 
 
