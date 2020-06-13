@@ -24,10 +24,11 @@ jobs:
     - name: Testing
       run: echo ${{ secrets.SPOTIFY__BASEURL }}
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
       env: 
         BASEURL: ${{ secrets.SPOTIFY__BASEURL }}
         PATHARTISTINFORMATION: ${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}
         PATHRECOMMENDATIONSBYGENRE: ${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}
         TOKENURL: ${{ secrets.SPOTIFY__TOKENURL }}
+      run: dotnet test --no-restore --verbosity normal
+
 
