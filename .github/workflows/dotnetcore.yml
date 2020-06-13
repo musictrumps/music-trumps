@@ -21,10 +21,10 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
     - name: Testing
       run: echo ${{ secrets.BASEURL }}
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
       env: 
         BASEURL: ${{ secrets.BASEURL }}
         PATHARTISTINFORMATION: ${{ secrets.PATHARTISTINFORMATION }}
