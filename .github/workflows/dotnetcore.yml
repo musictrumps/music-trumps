@@ -1,16 +1,12 @@
 name: .NET Core
-
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -22,7 +18,9 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
-      env:
-        SECRETS: ${{ secrets.SECRETS }}
-
+      run: |
+        export SPOTIFY__BASEURL='${{ secrets.SPOTIFY__BASEURL }}';
+        export SPOTIFY__PATHARTISTINFORMATION='${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}';
+        export SPOTIFY__PATHRECOMMENDATIONSBYGENRE='${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}';
+        export SPOTIFY__TOKENURL='${{ secrets.SPOTIFY__TOKENURL }}';
+        dotnet test --no-restore --verbosity normal
