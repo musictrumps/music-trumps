@@ -20,9 +20,9 @@ jobs:
     - name: Test
       run: |
         export SPOTIFY__BASEURL='${{ secrets.SPOTIFY__BASEURL }}';
-        export SPOTIFY__TOKENURL='${{ secrets.SPOTIFY__TOKENURL }}';
         export SPOTIFY__PATHARTISTINFORMATION='${{ secrets.SPOTIFY__PATHARTISTINFORMATION }}';
         export SPOTIFY__PATHRECOMMENDATIONSBYGENRE='${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}';
         export SPOTIFY__CLIENTID='${{ secrets.SPOTIFY__CLIENTID }}';
         export SPOTIFY__CLIENTSECRET='${{ secrets.SPOTIFY__CLIENTSECRET }}';    
+        export SPOTIFY__TOKENURL='${{ secrets.SPOTIFY__TOKENURL }}';
         dotnet test --no-restore --verbosity normal
