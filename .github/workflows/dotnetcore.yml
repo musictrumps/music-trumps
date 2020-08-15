@@ -24,5 +24,6 @@ jobs:
         export SPOTIFY__PATHRECOMMENDATIONSBYGENRE='${{ secrets.SPOTIFY__PATHRECOMMENDATIONSBYGENRE }}';
         export SPOTIFY__TOKENURL='${{ secrets.SPOTIFY__TOKENURL }}';
         export SPOTIFY__CLIENTID='${{ secrets.SPOTIFY__CLIENTID }}';
-        export SPOTIFY__CLIENTSECRET='${{ secrets.SPOTIFY__CLIENTSECRET }}';    
+        export SPOTIFY__CLIENTSECRET='${{ secrets.SPOTIFY__CLIENTSECRET }}';
+        export LASTFM__API_KEY='${{ secrets.LASTFM__API_KEY }}';
         dotnet test --no-restore --verbosity normal
