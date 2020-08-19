@@ -1,22 +1,17 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrumpEngine.Core;
-using TrumpEngine.Shared;
-using TrumpEngine.Shared.Settings;
 
 namespace TrumpEngine.Api.Controllers
 {
     [ApiController]
-  //  [Authorize]
+    [Authorize]
     public class BandsController : ControllerBase
     {
-        private readonly FirebaseSecrets _firebaseSecrets;
         private readonly BandCore _bandCore;
-        public BandsController(Settings secrets, BandCore bandCore)
+        public BandsController(BandCore bandCore)
         {
-            _firebaseSecrets = secrets.Firebase;
             _bandCore = bandCore;
         }
 

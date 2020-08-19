@@ -1,3 +1,6 @@
+using AspNetCore.Firebase.Authentication.Extensions;
+using Firebase.Auth;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,28 +22,22 @@ namespace TrumpEngine.Api
 
         public IConfiguration Configuration { get; }
 
+        private Settings _settings;
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-           
-            services.AddSingleton(Configuration.Get<Settings>());
+            _settings = Configuration.Get<Settings>();
+            services.AddSingleton(_settings);
             new DependencyInjection(services).ConfigureData();
 
-            //services
-            //    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //    {
-            //        options.Authority = "https://securetoken.google.com/music-trumps-database";
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuer = true,
-            //            ValidIssuer = "https://securetoken.google.com/music-trumps-database",
-            //            ValidateAudience = true,
-            //            ValidAudience = "music-trumps-database",
-            //            ValidateLifetime = true
-            //        };
-            //    });
+            services.AddSingleton<IFirebaseAuthService>(u => new FirebaseAuthService(
+                new FirebaseAuthOptions
+                {
+                    WebApiKey = _settings.Firebase.WebApiKey
+                }
+            ));
+            services.AddFirebaseAuthentication(_settings.Firebase.Issuer, _settings.Firebase.ProjectId);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +52,7 @@ namespace TrumpEngine.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-        //    app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

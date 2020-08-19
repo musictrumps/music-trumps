@@ -11,7 +11,7 @@ namespace TrumpEngine.UnitTests
     [TestClass]
     public class BasicMethodsTest
     {
-        IConfiguration Configuration { get; set; }
+       
         private readonly Settings _settings;
         public BasicMethodsTest()
         {
@@ -21,8 +21,8 @@ namespace TrumpEngine.UnitTests
                 .AddEnvironmentVariables();
 
 
-            Configuration = builder.Build();
-            _settings = Configuration.Get<Settings>();
+            var configuration = builder.Build();
+            _settings = configuration.Get<Settings>();
             Console.WriteLine(JsonSerializer.Serialize(_settings));
         }
 

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using TrumpEngine.Api.Security;
 using TrumpEngine.Core;
 using TrumpEngine.Data;
-using TrumpEngine.Data.Providers.Interface;
 
 namespace TrumpEngine.Api.Configuration
 {
@@ -27,6 +23,8 @@ namespace TrumpEngine.Api.Configuration
         {
             ServiceCollection.AddTransient<BandCore>();
             ServiceCollection.AddTransient<BandData>();
+            ServiceCollection.AddSingleton<IAccountService, AccountService>();
+
         }
     }
 }
