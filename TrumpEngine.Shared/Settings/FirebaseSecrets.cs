@@ -1,9 +1,9 @@
-﻿namespace TrumpEngine.Shared
+﻿namespace TrumpEngine.Shared.Settings
 {
     public class FirebaseSecrets
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Url { get; set; }
+        public string WebApiKey { get; set; }
+        public string ProjectId { get; set; }
+        public string Issuer { get; set; }
     }
 }

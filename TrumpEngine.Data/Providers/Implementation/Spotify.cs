@@ -10,6 +10,7 @@ using TrumpEngine.Data.Providers.Implementation.Model;
 using TrumpEngine.Data.Providers.Interface;
 using TrumpEngine.Model;
 using TrumpEngine.Shared;
+using TrumpEngine.Shared.Settings;
 
 namespace TrumpEngine.Data.Providers.Implementation
 {

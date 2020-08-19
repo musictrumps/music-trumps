@@ -5,6 +5,12 @@
     <UserSecretsId>38a71694-9475-4f26-98e2-2bf606640a80</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AspNetCore.Firebase.Authentication" Version="2.0.1" />
+    <PackageReference Include="Firebase.Auth.Rest" Version="1.1.8-beta" />
+    <PackageReference Include="FirebaseAdmin" Version="1.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TrumpEngine.Core\TrumpEngine.Core.csproj" />
     <ProjectReference Include="..\TrumpEngine.Shared\TrumpEngine.Shared.csproj" />
   </ItemGroup>
