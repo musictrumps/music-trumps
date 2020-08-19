@@ -117,7 +117,7 @@ namespace TrumpEngine.Data.Providers.Implementation
         {
             try
             {
-                byte[] credentials = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", "1cea836e0b114e1b865afc7ebcbf3865", "8d698f13989d4b47aa86f1e212d1ffdc")); //FIXME
+                byte[] credentials = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _spotifySecrets.ClientId, _spotifySecrets.ClientSecret));
                 string encodedCredentials = Convert.ToBase64String(credentials);
                 Token token = null;
 

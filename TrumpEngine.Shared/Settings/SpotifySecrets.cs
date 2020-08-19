@@ -8,6 +8,8 @@ namespace TrumpEngine.Shared
         public string TokenUrl { get; set; }
         public string PathRecommendationsByGenre { get; set; }
         public string PathArtistInformation { get; set; }
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
 
         public string GetUrlByGenre()
         {
