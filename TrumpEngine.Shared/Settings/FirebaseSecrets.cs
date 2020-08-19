@@ -1,4 +1,4 @@
-﻿namespace TrumpEngine.Shared
+﻿namespace TrumpEngine.Shared.Settings
 {
     public class FirebaseSecrets
     {
