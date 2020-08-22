@@ -6,9 +6,6 @@ namespace TrumpEngine.Data.Providers.Implementation.Model
 {
     internal class LastFmArtistInfo
     {
-        [JsonProperty(PropertyName = "tracks")]
-        public List<Track> Tracks { get; set; }
-
         [JsonProperty(PropertyName = "bio")]
         public LastFmArtistBiography Biography {get;set;}
     }
