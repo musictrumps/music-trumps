@@ -38,6 +38,7 @@ namespace TrumpEngine.UnitTests
 
             Assert.AreEqual(false, isNameBlank, "There are some blank names.");
             Assert.AreEqual(false, isPictureBlank, "There are some blank pictures.");
+            Assert.AreEqual(false, isSummaryBlank, "There are some blank summary.");
         }
     }
 }
