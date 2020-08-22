@@ -25,7 +25,7 @@ jobs:
         export SPOTIFY__TOKENURL='${{ secrets.SPOTIFY__TOKENURL }}';
         export SPOTIFY__CLIENTID='${{ secrets.SPOTIFY__CLIENTID }}';
         export SPOTIFY__CLIENTSECRET='${{ secrets.SPOTIFY__CLIENTSECRET }}';
-        export LASTFM__API_KEY='${{ secrets.LASTFM_API_KEY }}';
-        export LASTFM__REGISTERED_TO='${{ secrets.LASTFM_REGISTERED_TO }}';
-        export LASTFM__SHARED_SECRET='${{ secrets.LASTFM_SHARED_SECRET }}';
+        export LASTFM__APIKEY='${{ secrets.LASTFM_APIKEY }}';
+        export LASTFM__REGISTEREDTO='${{ secrets.LASTFM_REGISTEREDTO }}';
+        export LASTFM__SHAREDSECRET='${{ secrets.LASTFM_SHAREDSECRET }}';
         dotnet test --no-restore --verbosity normal
