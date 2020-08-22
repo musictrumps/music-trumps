@@ -4,10 +4,16 @@ using System.Collections.Generic;
 
 namespace TrumpEngine.Data.Providers.Implementation.Model
 {
-    internal class LastFmArtistInfo
+    internal class LastFmArtist
     {
         [JsonProperty(PropertyName = "bio")]
         public LastFmArtistBiography Biography {get;set;}
+    }
+
+    internal class LastFmArtistInfo
+    {
+        [JsonProperty(PropertyName = "artist")]
+        public LastFmArtist Artist {get;set;}
     }
 
     internal class LastFmArtistBiography
