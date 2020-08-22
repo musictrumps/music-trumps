@@ -88,7 +88,7 @@ namespace TrumpEngine.Data.Providers.Implementation
                     band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
 
                     //GET DATA FROM LASTFM
-                    band.Summary =  lastFm.GetInfo(band.Name).Biography.Summary;
+                    band.Summary = lastFm.GetInfo(band.Name).Artist?.Biography?.Summary;
                 }
 
                 return bands;
