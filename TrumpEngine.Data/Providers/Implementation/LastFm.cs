@@ -23,17 +23,23 @@ namespace TrumpEngine.Data.Providers.Implementation
             _lastFmSecrets = lastFmSecrets;
         }
         
-        public string GetInfo(string artist) 
+        public LastFmArtistInfo GetInfo(string artist) 
         {
-            string summary = null;
+            try
+            {
+                LastFmArtistInfo lastFmArtistInfo;
                 using (System.Net.WebClient web = new System.Net.WebClient())
                 {
                     string response = web.DownloadString(string.Format(LASTFM_API_URL, _lastFmSecrets.ApiKey));
-                    json = JsonConvert.DeserializeObject<RecommendedTracks>(response);
+                    lastFmArtistInfo = JsonConvert.DeserializeObject<LastFmArtistInfo>(response);
                 }
 
-                return summary;    
+                return lastFmArtistInfo;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
-        
     }
 }
