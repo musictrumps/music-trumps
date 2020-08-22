@@ -30,7 +30,8 @@ namespace TrumpEngine.Data.Providers.Implementation
                 LastFmArtistInfo lastFmArtistInfo;
                 using (System.Net.WebClient web = new System.Net.WebClient())
                 {
-                    string response = web.DownloadString(string.Format(LASTFM_API_URL, _lastFmSecrets.ApiKey));
+                    string response = web.DownloadString(string.Format(LASTFM_API_URL, artist, _lastFmSecrets.ApiKey));
+                    System.IO.File.WriteAllText("teste.txt", response);
                     lastFmArtistInfo = JsonConvert.DeserializeObject<LastFmArtistInfo>(response);
                 }
 
