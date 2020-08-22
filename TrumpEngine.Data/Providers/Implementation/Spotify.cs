@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -23,11 +23,13 @@ namespace TrumpEngine.Data.Providers.Implementation
         private const string SPOTIFY_ACCESS_TOKEN = "Bearer {0}";
         private const int SPOTIFY_MAX_AMOUNT_IDS_BY_SEVERAL_ARISTS = 50; //LIMIT DEFINED BY THE SPOTIFY API
         private readonly SpotifySecrets _spotifySecrets;
+        private readonly LastFmSecrets _lastFmSecrets;
         private string AccessToken { get; set; }
 
-        public Spotify(SpotifySecrets spotifySecrets)
+        public Spotify(SpotifySecrets spotifySecrets, LastFmSecrets lastFmSecrets)
         {
             _spotifySecrets = spotifySecrets;
+            _lastFmSecrets = lastFmSecrets;
             this.AccessToken = GetAccessToken();
             
         }
@@ -75,6 +77,7 @@ namespace TrumpEngine.Data.Providers.Implementation
 
                 //TODO: INJECT BY A INJECTION MECHANISM
                 MusicBrainz.MusicBrainz musicBrainz = new MusicBrainz.MusicBrainz();
+                LastFm lastFm = new LastFm(_lastFmSecrets);
 
                 //TODO: MOVE THE LINES ABOVE TO A CLASS TO COMBINE ALL THE DATA
                 foreach (var artist in artists)
@@ -83,6 +86,9 @@ namespace TrumpEngine.Data.Providers.Implementation
                     band.Picture = artist.Images?.FirstOrDefault().Url;
                     Task.Delay(2000).Wait(); //FIXME: IT'S JUST A WORKAROUND DUE TO THE RATE LIMITING OF MUSICBRAINZ.ORG API
                     band.Begin = musicBrainz.GetBeginDate(artist.Name, genre);
+
+                    //GET DATA FROM LASTFM
+                    
                 }
 
                 return bands;
