@@ -8,5 +8,6 @@ namespace TrumpEngine.Model
         public string Name { get; set; }
         public string Picture { get; set; }
         public DateTime Begin { get; set; }
+        public string Summary { get; set; }
     }
-}
+ }
