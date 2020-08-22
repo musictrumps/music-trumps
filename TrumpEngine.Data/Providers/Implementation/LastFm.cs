@@ -15,5 +15,10 @@ namespace TrumpEngine.Data.Providers.Implementation
 {
     internal class LastFm
     {
+        private readonly LastFmSecrets _lastFmSecrets;
+        public LastFm(LastFmSecrets lastFmSecrets)
+        {
+            _lastFmSecrets = lastFmSecrets;
+        }
     }
 }
