@@ -34,6 +34,7 @@ namespace TrumpEngine.UnitTests
 
             bool isNameBlank = bands.Exists(b => string.IsNullOrWhiteSpace(b.Name));
             bool isPictureBlank = bands.Exists(b => string.IsNullOrWhiteSpace(b.Picture));
+            bool isSummaryBlank = bands.Exists(b => string.IsNullOrWhiteSpace(b.Summary));
 
             Assert.AreEqual(false, isNameBlank, "There are some blank names.");
             Assert.AreEqual(false, isPictureBlank, "There are some blank pictures.");
