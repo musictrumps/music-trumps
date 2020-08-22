@@ -16,9 +16,9 @@ namespace TrumpEngine.Data.Providers.Implementation.Model
     internal class LastFmArtistBiography
     {
         [JsonProperty(PropertyName = "summary")]
-        public string Summary {get;set}
+        public string Summary {get;set;}
         
         [JsonProperty(PropertyName = "content")]
-        public string Content {get;set}
+        public string Content {get;set;}
     }
 }
