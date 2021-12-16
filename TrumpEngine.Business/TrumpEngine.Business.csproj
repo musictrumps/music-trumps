@@ -1,14 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.13" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\TrumpEngine.Data\TrumpEngine.Data.csproj" />
     <ProjectReference Include="..\TrumpEngine.Model\TrumpEngine.Model.csproj" />
   </ItemGroup>
 
