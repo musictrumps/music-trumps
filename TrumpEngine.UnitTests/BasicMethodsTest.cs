@@ -2,11 +2,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using TrumpEngine.Core;
-using TrumpEngine.Data;
+using TrumpEngine.Scraper.Core;
+using TrumpEngine.Scraper.Data;
 using TrumpEngine.Shared.Settings;
 
-namespace TrumpEngine.UnitTests
+namespace TrumpEngine.IntegrationTests
 {
     [TestClass]
     public class BasicMethodsTest
@@ -15,7 +15,6 @@ namespace TrumpEngine.UnitTests
         private readonly Settings _settings;
         public BasicMethodsTest()
         {
-           
             var builder = new ConfigurationBuilder() 
                 .AddUserSecrets<BasicMethodsTest>()
                 .AddEnvironmentVariables();

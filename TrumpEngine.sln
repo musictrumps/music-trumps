@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Core", "TrumpEngine.Core\TrumpEngine.Core.csproj", "{3E509578-E6FB-4A1C-A94C-4DB0B7D7336C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Scraper.Core", "TrumpEngine.Scraper.Core\TrumpEngine.Scraper.Core.csproj", "{3E509578-E6FB-4A1C-A94C-4DB0B7D7336C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.UnitTests", "TrumpEngine.UnitTests\TrumpEngine.UnitTests.csproj", "{DFF73714-AA50-42C0-B049-94A703848BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.IntegrationTests", "TrumpEngine.UnitTests\TrumpEngine.IntegrationTests.csproj", "{DFF73714-AA50-42C0-B049-94A703848BE5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Model", "TrumpEngine.Model\TrumpEngine.Model.csproj", "{EFAE5441-C992-426A-9FA1-4224654266B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Data", "TrumpEngine.Data\TrumpEngine.Data.csproj", "{802B192C-8BD6-423E-9841-5394303ABB21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Scraper.Data", "TrumpEngine.Scraper.Data\TrumpEngine.Scraper.Data.csproj", "{802B192C-8BD6-423E-9841-5394303ABB21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Console", "TrumpEngine.Console\TrumpEngine.Console.csproj", "{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Scraper.Loader", "TrumpEngine.Scraper.Loader\TrumpEngine.Scraper.Loader.csproj", "{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Api", "TrumpEngine.Api\TrumpEngine.Api.csproj", "{8AAB444D-7A19-4E84-A65F-EF9188D5D3CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpEngine.Shared", "TrumpEngine.Shared\TrumpEngine.Shared.csproj", "{EF3C06B0-9732-4802-8971-F96F71ABD005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrumpEngine.Shared", "TrumpEngine.Shared\TrumpEngine.Shared.csproj", "{EF3C06B0-9732-4802-8971-F96F71ABD005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpEngine.Data", "TrumpEngine.Data\TrumpEngine.Data.csproj", "{8A16CFE8-6725-426A-A455-4FAE9FD96816}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scraper", "Scraper", "{DAA2C286-1041-4FBD-AC4F-CC42024489FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrumpEngine.Business", "TrumpEngine.Business\TrumpEngine.Business.csproj", "{02F8CD8D-15D3-4225-850E-DEF6268CC471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +57,22 @@ Global
 		{EF3C06B0-9732-4802-8971-F96F71ABD005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF3C06B0-9732-4802-8971-F96F71ABD005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF3C06B0-9732-4802-8971-F96F71ABD005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A16CFE8-6725-426A-A455-4FAE9FD96816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A16CFE8-6725-426A-A455-4FAE9FD96816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A16CFE8-6725-426A-A455-4FAE9FD96816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A16CFE8-6725-426A-A455-4FAE9FD96816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02F8CD8D-15D3-4225-850E-DEF6268CC471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F8CD8D-15D3-4225-850E-DEF6268CC471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F8CD8D-15D3-4225-850E-DEF6268CC471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F8CD8D-15D3-4225-850E-DEF6268CC471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3E509578-E6FB-4A1C-A94C-4DB0B7D7336C} = {DAA2C286-1041-4FBD-AC4F-CC42024489FB}
+		{802B192C-8BD6-423E-9841-5394303ABB21} = {DAA2C286-1041-4FBD-AC4F-CC42024489FB}
+		{C9552DBB-FADA-4D55-AAD4-5AAADA801F6D} = {DAA2C286-1041-4FBD-AC4F-CC42024489FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {568E73D8-667F-4B1E-8879-9014542F9844}

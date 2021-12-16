@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TrumpEngine.Api.Security;
-using TrumpEngine.Core;
-using TrumpEngine.Data;
+using TrumpEngine.Scraper.Core;
+using TrumpEngine.Scraper.Data;
 
 namespace TrumpEngine.Api.Configuration
 {

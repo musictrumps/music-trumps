@@ -15,6 +15,8 @@ namespace TrumpEngine.Api
 {
     public class Startup
     {
+        readonly string allowSpecificOrigins = "_allowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +28,17 @@ namespace TrumpEngine.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(allowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("*")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
             _settings = Configuration.Get<Settings>();
             services.AddSingleton(_settings);
@@ -47,13 +60,12 @@ namespace TrumpEngine.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-          
-            
-            app.UseHttpsRedirection();
 
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors(allowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {
