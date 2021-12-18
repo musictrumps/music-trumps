@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -48,7 +47,9 @@ namespace TrumpEngine.Api.Controllers
             string message = "Room is full";
 
             //TODO: Need to consider the given cards from player1 to avoid repeating to player2.
-            if (game != null && string.IsNullOrEmpty(game.Player2))
+            if (game != null
+                && !string.IsNullOrEmpty(game.Player1)
+                && string.IsNullOrEmpty(game.Player2))
             {
                 game.Player2 = playerName;
                 game.Player2_Turn = 0;
@@ -113,7 +114,6 @@ namespace TrumpEngine.Api.Controllers
             if (!string.IsNullOrEmpty(game.Player1_CurrentBand)
                 && !string.IsNullOrEmpty(game.Player2_CurrentBand))
             {
-
                 var player1Bands = JsonConvert.DeserializeObject<List<Band>>(game.Player1_Cards);
                 var player2Bands = JsonConvert.DeserializeObject<List<Band>>(game.Player2_Cards);
 
