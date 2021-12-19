@@ -9,13 +9,11 @@
         public string Player2_Cards { get; set; }
         public int Player1_Points { get; set; }
         public int Player2_Points { get; set; }
-
         public int Player1_Turn { get; set; }
         public int Player2_Turn { get; set; }
-
         public string Player1_CurrentBand { get; set; }
         public string Player2_CurrentBand { get; set; }
-
+        public string PlayersTurn { get; set; }
         public Game()
         {
             this.Player1 = string.Empty;

@@ -15,7 +15,7 @@ namespace TrumpEngine.Data
                 {
                     connection.Open();
                     SqliteCommand command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO game (UUID,Player1,Player2,Player1_Cards,Player2_Cards,Player1_Points,Player2_Points,Player1_Turn,Player2_Turn,Player1_CurrentBand,Player2_CurrentBand) VALUES (@UUID,@Player1,@Player2,@Player1_Cards,@Player2_Cards,@Player1_Points,@Player2_Points,@Player1_Turn,@Player2_Turn,@Player1_CurrentBand,@Player2_CurrentBand)";
+                    command.CommandText = "INSERT INTO game (UUID,Player1,Player2,Player1_Cards,Player2_Cards,Player1_Points,Player2_Points,Player1_Turn,Player2_Turn,Player1_CurrentBand,Player2_CurrentBand,PlayersTurn) VALUES (@UUID,@Player1,@Player2,@Player1_Cards,@Player2_Cards,@Player1_Points,@Player2_Points,@Player1_Turn,@Player2_Turn,@Player1_CurrentBand,@Player2_CurrentBand,@PlayersTurn)";
                     command.Parameters.AddWithValue("UUID", game.UUID);
                     command.Parameters.AddWithValue("Player1", game.Player1);
                     command.Parameters.AddWithValue("Player2", game.Player2);
@@ -27,6 +27,7 @@ namespace TrumpEngine.Data
                     command.Parameters.AddWithValue("Player2_Turn", game.Player2_Turn);
                     command.Parameters.AddWithValue("Player1_CurrentBand", game.Player1_CurrentBand);
                     command.Parameters.AddWithValue("Player2_CurrentBand", game.Player2_CurrentBand);
+                    command.Parameters.AddWithValue("PlayersTurn", game.PlayersTurn);
                     command.ExecuteNonQuery();
                 }
             }
@@ -46,7 +47,7 @@ namespace TrumpEngine.Data
                 {
                     connection.Open();
                     SqliteCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT UUID, Player1, Player2, Player1_Cards, Player2_Cards, Player1_Points, Player2_Points, Player1_Turn, Player2_Turn, Player1_CurrentBand, Player2_CurrentBand FROM game WHERE UUID=@UUID";
+                    command.CommandText = "SELECT UUID, Player1, Player2, Player1_Cards, Player2_Cards, Player1_Points, Player2_Points, Player1_Turn, Player2_Turn, Player1_CurrentBand, Player2_CurrentBand, PlayersTurn FROM game WHERE UUID=@UUID";
                     command.Parameters.AddWithValue("UUID", UUID);
                     IDataReader dr = command.ExecuteReader();
                     while (dr.Read())
@@ -63,7 +64,8 @@ namespace TrumpEngine.Data
                             Player1_Turn = dr["Player1_Turn"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Player1_Turn"]),
                             Player2_Turn = dr["Player2_Turn"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Player2_Turn"]),
                             Player1_CurrentBand = Convert.ToString(dr["Player1_CurrentBand"]),
-                            Player2_CurrentBand = Convert.ToString(dr["Player2_CurrentBand"])
+                            Player2_CurrentBand = Convert.ToString(dr["Player2_CurrentBand"]),
+                            PlayersTurn = Convert.ToString(dr["PlayersTurn"])
                         };
                     }
                 }
@@ -84,7 +86,7 @@ namespace TrumpEngine.Data
                 {
                     connection.Open();
                     SqliteCommand command = connection.CreateCommand();
-                    command.CommandText = "UPDATE game SET Player1=@Player1,Player2=@Player2,Player1_Cards=@Player1_Cards,Player2_Cards=@Player2_Cards,Player1_Points=@Player1_Points,Player2_Points=@Player2_Points,Player1_Turn=@Player1_Turn,Player2_Turn=@Player2_Turn,Player1_CurrentBand=@Player1_CurrentBand,Player2_CurrentBand=@Player2_CurrentBand WHERE UUID = @UUID";
+                    command.CommandText = "UPDATE game SET Player1=@Player1,Player2=@Player2,Player1_Cards=@Player1_Cards,Player2_Cards=@Player2_Cards,Player1_Points=@Player1_Points,Player2_Points=@Player2_Points,Player1_Turn=@Player1_Turn,Player2_Turn=@Player2_Turn,Player1_CurrentBand=@Player1_CurrentBand,Player2_CurrentBand=@Player2_CurrentBand,PlayersTurn=@PlayersTurn WHERE UUID = @UUID";
                     command.Parameters.AddWithValue("UUID", game.UUID);
                     command.Parameters.AddWithValue("Player1", game.Player1);
                     command.Parameters.AddWithValue("Player2", game.Player2);
@@ -96,6 +98,7 @@ namespace TrumpEngine.Data
                     command.Parameters.AddWithValue("Player2_Turn", game.Player2_Turn);
                     command.Parameters.AddWithValue("Player1_CurrentBand", game.Player1_CurrentBand);
                     command.Parameters.AddWithValue("Player2_CurrentBand", game.Player2_CurrentBand);
+                    command.Parameters.AddWithValue("PlayersTurn", game.PlayersTurn);
                     command.ExecuteNonQuery();
                 }
             }

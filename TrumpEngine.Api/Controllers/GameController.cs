@@ -29,9 +29,10 @@ namespace TrumpEngine.Api.Controllers
             game.Player1 = playerName.Trim();
             game.Player1_Turn = 1;
             game.Player1_Cards = JsonConvert.SerializeObject(shuffledBands.Take(TOTAL_CARDS));
+            game.PlayersTurn = playerName.Trim();
             InsertGame(game);
 
-            return Ok(game.UUID);
+            return Ok(game);
         }
 
         [Route("/api/game/join")]
@@ -90,17 +91,19 @@ namespace TrumpEngine.Api.Controllers
 
             if (game.Player1_Turn == 1)
             {
+                game.PlayersTurn = game.Player2;
                 game.Player2_Turn = 1;
                 game.Player1_Turn = 0;
             }
             else
             {
+                game.PlayersTurn = game.Player1;
                 game.Player2_Turn = 0;
                 game.Player1_Turn = 1;
             }
 
             UpdateGame(game);
-            return Ok();
+            return Ok(game);
         }
 
         [Route("/api/game/round")]
