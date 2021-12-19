@@ -13,7 +13,7 @@ namespace TrumpEngine.Data
         {
             try
             {
-                using (var connection = new SqliteConnection("Data Source=C:\\Users\\thiago.DESKTOP-TT0ETA0\\source\\repos\\music-trumps\\TrumpEngine.Api\\trumpdata.db"))
+                using (var connection = new SqliteConnection("Data Source=/app/trumpdata.db"))
                 {
                     connection.Open();
                     SqliteCommand command = connection.CreateCommand();
@@ -37,7 +37,7 @@ namespace TrumpEngine.Data
 
             try
             {
-                using (var connection = new SqliteConnection("Data Source=C:\\Users\\thiago.DESKTOP-TT0ETA0\\source\\repos\\music-trumps\\TrumpEngine.Api\\trumpdata.db"))
+                using (var connection = new SqliteConnection("Data Source=/app/trumpdata.db"))
                 {
                     connection.Open();
                     SqliteCommand command = connection.CreateCommand();

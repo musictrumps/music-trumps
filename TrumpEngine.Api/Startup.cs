@@ -40,14 +40,6 @@ namespace TrumpEngine.Api
             _settings = Configuration.Get<Settings>();
             services.AddSingleton(_settings);
             new DependencyInjection(services).ConfigureData();
-
-            services.AddSingleton<IFirebaseAuthService>(u => new FirebaseAuthService(
-                new FirebaseAuthOptions
-                {
-                    WebApiKey = _settings.Firebase.WebApiKey
-                }
-            ));
-            services.AddFirebaseAuthentication(_settings.Firebase.Issuer, _settings.Firebase.ProjectId);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
